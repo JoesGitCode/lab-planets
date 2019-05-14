@@ -1,4 +1,5 @@
 const Planets = require('../data/planets.js');
+const PubSub = require('../helpers/pub_sub.js')
 
 
 const SolarSystem = function(planets) {
@@ -6,8 +7,12 @@ const SolarSystem = function(planets) {
 };
 
 SolarSystem.prototype.bindEvents = function () {
-  PubSub.publish('SolarSystem:all-planets-ready', this.planets);
-  console.log('solar system published planets');
+  // PubSub.publish('SolarSystem:all-planets-ready', this.planets);
+  // console.log('solar system published planets');
+
+  PubSub.subscribe('SelectView:change', (event) => {
+    console.log(event.detail);
+  })
 };
 
 
